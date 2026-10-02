@@ -1,0 +1,29 @@
+# Web interface
+flask>=3.0.0
+
+# Security: CSRF protection, rate limiting, .env loading, upload content sniffing
+flask-wtf>=1.2.0
+flask-limiter>=3.7.0
+python-dotenv>=1.0.0
+filetype>=1.2.0
+
+# Speech-to-text + translation
+faster-whisper>=1.0.0
+
+# Local summarization backend (used when --backend local, the default)
+# Pinned (not just >=) to avoid pulling an unstable/pre-release build that
+# has broken pipeline task registration on some setups.
+transformers==4.44.2
+torch>=2.2.0
+
+# OpenAI summarization backend (only needed if you use --backend openai)
+openai>=1.30.0
+
+# Gemini summarization backend (only needed if you use --backend gemini).
+# google-genai is Google's current SDK; the older google-generativeai
+# package is deprecated.
+google-genai>=1.0.0
+
+# Word / PDF export and email attachments
+python-docx>=1.1.0
+reportlab>=4.2.0

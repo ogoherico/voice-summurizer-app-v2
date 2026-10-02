@@ -1,0 +1,19 @@
+# Secrets — never commit real credentials
+.env
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# Runtime data (uploaded audio, generated transcripts/summaries)
+uploads/*
+results/*
+!uploads/.gitkeep
+!results/.gitkeep
+
+# Job history database (contains transcript/summary text)
+jobs.sqlite3
+jobs.sqlite3-wal
+jobs.sqlite3-shm

@@ -1,0 +1,16 @@
+  <header class="topbar">
+    <img class="logo" src="{{ url_for('static', filename='logo.png') }}" alt="Company logo">
+    <div class="title-block">
+      <h1>🎙️ Voice File Summarizer</h1>
+      <p>Upload audio in any language — get an English transcript and summary.</p>
+    </div>
+  </header>
+  <nav class="subnav"><a href="{{ url_for('history') }}">📜 History</a></nav>
+
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for m in messages %}
+        <div class="flash">{{ m }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}

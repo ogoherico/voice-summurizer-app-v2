@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Voice File Summarizer</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  {% include "_header.html" %}
+
+  <main>
+    {% if job.status in ("queued", "processing") %}
+    <div class="card results" id="progress-card">
+      <div class="progress-wrap">
+        <div class="spinner"></div>
+        <div class="progress-text" id="progress-text">{{ job.progress or "Starting..." }}</div>
+      </div>
+    </div>
+    <script>
+      // Polls this job's status every 2s and reloads the page once it's
+      // done or errored, so the results/error markup below renders fresh
+      // from the server rather than being duplicated in JavaScript.
+      const jobId = {{ job.id | tojson }};
+      function poll() {
+        fetch(`/job/${jobId}/status`)
+          .then(r => r.json())
+          .then(data => {
+            if (data.status === "done" || data.status === "error") {
+              window.location.reload();
+            } else {
+              document.getElementById("progress-text").textContent = data.progress || "Working...";
+              setTimeout(poll, 2000);
+            }
+          })
+          .catch(() => setTimeout(poll, 4000));
+      }
+      setTimeout(poll, 2000);
+    </script>
+
+    {% elif job.status == "error" %}
+    <div class="flash">Something went wrong: {{ job.error }}</div>
+    <div class="card">
+      <a href="{{ url_for('index') }}"><button type="button">Try another file</button></a>
+    </div>
+
+    {% else %}
+    <div class="card results">
+      <span class="meta">🌍 Detected language: {{ job.lang_code }} ({{ job.lang_prob }} confidence)</span>
+      <span class="meta engine">🧠 Summary by {{ job.engine }} &middot; Speech model: {{ job.whisper_model }}</span>
+      {% if job.fallback_note %}<div class="fallback-note">ℹ️ {{ job.fallback_note }}</div>{% endif %}
+
+      <h3 class="section-title summary">📝 Summary (English)</h3>
+      <div class="text-block">{{ job.summary }}</div>
+
+      <h3 class="section-title" style="color:#c2410c;">✅ Action Items</h3>
+      {% if job.action_items %}
+        <ul class="action-items">
+          {% for ai in job.action_items %}
+          <li>
+            {{ ai.item }}
+            {% if ai.who or ai.due %}
+            <span class="who-due">{% if ai.who %}Who: {{ ai.who }}{% endif %}{% if ai.who and ai.due %} &middot; {% endif %}{% if ai.due %}Due: {{ ai.due }}{% endif %}</span>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+      {% elif job.action_items_note %}
+        <p class="no-items-note">{{ job.action_items_note }}</p>
+      {% else %}
+        <p class="no-items-note">No action items were found in this recording.</p>
+      {% endif %}
+
+      <h3 class="section-title transcript">📄 Full Transcript (English)</h3>
+      <div class="text-block transcript">{{ job.transcript }}</div>
+
+      <h3 class="section-title" style="color:#333;">⬇ Downloads</h3>
+      <div class="downloads">
+        <a class="dl-txt" href="{{ url_for('download', job_id=job.id, kind='summary') }}">Summary .txt</a>
+        <a class="dl-docx" href="{{ url_for('download', job_id=job.id, kind='summary_docx') }}">Summary .docx</a>
+        <a class="dl-pdf" href="{{ url_for('download', job_id=job.id, kind='summary_pdf') }}">Summary .pdf</a>
+        <a class="dl-transcript" href="{{ url_for('download', job_id=job.id, kind='transcript') }}">Transcript .txt</a>
+      </div>
+
+      <h3 class="section-title email">📧 Email the summary</h3>
+      <form action="{{ url_for('email_summary', job_id=job.id) }}" method="post" class="email-form">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="email" name="email" placeholder="recipient@example.com" required>
+        <select name="attach_format">
+          <option value="docx" selected>Attach as Word (.docx)</option>
+          <option value="pdf">Attach as PDF</option>
+          <option value="txt">Attach as .txt</option>
+        </select>
+        <button type="submit">Send</button>
+      </form>
+    </div>
+    {% endif %}
+  </main>
+
+  <footer>Voice File Summarizer</footer>
+</body>
+</html>

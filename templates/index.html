@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Voice File Summarizer</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  {% include "_header.html" %}
+
+  <main>
+    <div class="card">
+      <form action="{{ url_for('summarize') }}" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <label for="audio_file">Audio file</label>
+        <input type="file" id="audio_file" name="audio_file" accept=".mp3,.wav,.m4a,.ogg,.flac,.webm,.mp4,.aac" required>
+
+        <p class="auto-note">✨ No settings needed — the best available speech model and summarizer are chosen automatically, and action items are pulled out for you.</p>
+
+        <button type="submit">✨ Transcribe &amp; Summarize</button>
+        <div class="spinner-note">Processing runs in the background — you'll see live progress on the next page.</div>
+      </form>
+    </div>
+  </main>
+
+  <footer>Voice File Summarizer</footer>
+</body>
+</html>

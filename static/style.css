@@ -1,0 +1,276 @@
+    :root {
+      --grad-1: #6a11cb;
+      --grad-2: #2575fc;
+      --grad-3: #ff5f6d;
+      --accent-blue: #2575fc;
+      --accent-purple: #6a11cb;
+      --accent-pink: #ff5f6d;
+      --accent-orange: #ff9a3c;
+      --accent-green: #12b886;
+      --accent-teal: #17a2b8;
+      color-scheme: light;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(160deg, #f5f7ff 0%, #fdf3f7 100%);
+      color: #1f2328;
+    }
+    header.topbar {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 18px 32px;
+      background: linear-gradient(100deg, var(--grad-1), var(--grad-2) 60%, var(--grad-3));
+      box-shadow: 0 4px 18px rgba(0,0,0,0.15);
+    }
+    header.topbar img.logo {
+      height: 56px;
+      width: auto;
+      background: #fff;
+      border-radius: 10px;
+      padding: 4px 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    }
+    header.topbar .title-block h1 {
+      color: #fff;
+      font-size: 1.5rem;
+      margin: 0;
+      letter-spacing: 0.3px;
+    }
+    header.topbar .title-block p {
+      color: rgba(255,255,255,0.9);
+      margin: 2px 0 0;
+      font-size: 0.95rem;
+    }
+
+    main {
+      max-width: 820px;
+      margin: 32px auto;
+      padding: 0 20px 60px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 26px 28px;
+      margin-bottom: 26px;
+      box-shadow: 0 6px 24px rgba(31, 35, 40, 0.08);
+      border-top: 6px solid var(--accent-purple);
+    }
+    .card.results { border-top-color: var(--accent-teal); }
+
+    label { display: block; font-weight: 700; margin: 16px 0 6px; color: #2d2d2d; }
+    select, input[type="file"], input[type="email"] {
+      width: 100%;
+      padding: 10px;
+      border: 2px solid #e3e6f0;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      background: #fafbff;
+    }
+    select:focus, input:focus { outline: none; border-color: var(--accent-blue); }
+
+    button {
+      margin-top: 22px;
+      background: linear-gradient(90deg, var(--grad-1), var(--grad-2));
+      color: #fff;
+      border: none;
+      padding: 12px 26px;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(106, 17, 203, 0.35);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    button:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(106, 17, 203, 0.45); }
+
+    .flash {
+      background: #fff8c5;
+      border: 1px solid #d4a72c;
+      padding: 10px 14px;
+      border-radius: 8px;
+      margin: 20px 20px 0;
+      max-width: 780px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .meta {
+      display: inline-block;
+      background: linear-gradient(90deg, var(--accent-teal), var(--accent-blue));
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.85rem;
+      padding: 6px 14px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+    }
+
+    h3.section-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.1rem;
+      margin: 22px 0 10px;
+    }
+    h3.section-title.summary { color: var(--accent-purple); }
+    h3.section-title.transcript { color: var(--accent-teal); }
+    h3.section-title.email { color: var(--accent-pink); }
+
+    .text-block {
+      white-space: pre-wrap;
+      background: #f6f8ff;
+      border: 1px solid #e3e6f0;
+      border-left: 4px solid var(--accent-purple);
+      border-radius: 8px;
+      padding: 14px;
+      max-height: 320px;
+      overflow-y: auto;
+      font-size: 0.95rem;
+      line-height: 1.55;
+    }
+    .text-block.transcript { border-left-color: var(--accent-teal); }
+
+    .downloads {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .downloads a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 10px 18px;
+      border-radius: 24px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+      transition: transform 0.15s ease;
+    }
+    .downloads a:hover { transform: translateY(-2px); }
+    .dl-txt { background: linear-gradient(90deg, #34a0a4, #52b788); }
+    .dl-docx { background: linear-gradient(90deg, #2575fc, #6a11cb); }
+    .dl-pdf { background: linear-gradient(90deg, #ff5f6d, #ff9a3c); }
+    .dl-transcript { background: linear-gradient(90deg, #8e2de2, #4a00e0); }
+
+    .email-form {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .email-form input[type="email"] { flex: 1; min-width: 220px; }
+    .email-form select { width: auto; }
+    .email-form button {
+      margin-top: 0;
+      padding: 10px 22px;
+      background: linear-gradient(90deg, var(--accent-pink), var(--accent-orange));
+      box-shadow: 0 4px 14px rgba(255, 95, 109, 0.35);
+    }
+    .email-form button:hover { box-shadow: 0 6px 18px rgba(255, 95, 109, 0.45); }
+
+    .auto-note {
+      background: #f3f0ff;
+      border-left: 4px solid var(--accent-purple);
+      border-radius: 6px;
+      padding: 10px 14px;
+      margin: 18px 0 0;
+      color: #4a3a7a;
+      font-size: 0.92rem;
+    }
+    .meta.engine { background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink)); margin-left: 6px; }
+    .fallback-note {
+      background: #fff8e6;
+      border: 1px solid #f0d58a;
+      border-radius: 8px;
+      padding: 8px 12px;
+      margin: 0 0 14px;
+      font-size: 0.88rem;
+      color: #6b5200;
+    }
+    .spinner-note { color: #57606a; font-size: 0.85rem; margin-top: 10px; }
+    nav.subnav {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 10px 20px 0;
+      text-align: right;
+    }
+    nav.subnav a {
+      color: var(--accent-purple);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+    nav.subnav a:hover { text-decoration: underline; }
+
+    /* --- processing / job page --- */
+    .progress-wrap { text-align: center; padding: 30px 10px; }
+    .spinner {
+      width: 42px; height: 42px; margin: 0 auto 16px;
+      border: 4px solid #e3e6f0;
+      border-top-color: var(--accent-purple);
+      border-radius: 50%;
+      animation: spin 0.9s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .progress-text { font-weight: 700; color: #333; }
+
+    /* --- action items --- */
+    .action-items { list-style: none; padding: 0; margin: 10px 0 0; }
+    .action-items li {
+      background: #fff5f0;
+      border-left: 4px solid var(--accent-orange);
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+    }
+    .action-items li .who-due {
+      display: block;
+      font-size: 0.8rem;
+      color: #8a6a4a;
+      margin-top: 3px;
+    }
+    .no-items-note {
+      color: #57606a;
+      font-size: 0.9rem;
+      font-style: italic;
+    }
+
+    /* --- history table --- */
+    table.history { width: 100%; border-collapse: collapse; }
+    table.history th, table.history td {
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 1px solid #eef0f6;
+      font-size: 0.92rem;
+    }
+    table.history th { color: #57606a; font-weight: 700; font-size: 0.82rem; text-transform: uppercase; }
+    table.history tr:hover { background: #faf9ff; }
+    table.history a { color: var(--accent-purple); text-decoration: none; font-weight: 700; }
+    table.history a:hover { text-decoration: underline; }
+    .status-pill {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 12px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .status-done { background: var(--accent-green); }
+    .status-error { background: var(--accent-pink); }
+    .status-processing, .status-queued { background: var(--accent-orange); }
+    footer {
+      text-align: center;
+      color: #8a8f98;
+      font-size: 0.8rem;
+      padding: 20px;
+    }
